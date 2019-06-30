@@ -20,51 +20,63 @@ class AdvisorsPage extends Component {
           languagesFilter: ['en','ru','fr','de','es']
         };
     
-        window.onscroll = debounce(() => {
-          const {
+        window.addEventListener('scroll', this.onScroll, false);
+    }
+
+    onScroll = debounce(() => {
+        const {
             loadAdvisors,
             state: {
-              error,
-              isLoading,
+            error,
+            isLoading,
             },
-          } = this;
+        } = this;
     
-          if (error || isLoading) return;
+        if (error || isLoading) return;
     
-          if (
+        if (
             window.innerHeight + document.documentElement.scrollTop
             === document.documentElement.offsetHeight
-          ) {
+        ) {
             loadAdvisors();
-          }
-        }, 100);
-    }
+        }
+    }, 100);
 
     componentDidMount() {
         this.loadAdvisors();
     }
 
-    loadAdvisors = () => {
-        this.setState({ isLoading: true }, () => {
-            request
-            .get('http://localhost:5000/')
-            .then((results) => {
-                const nextAdvisors = results.body.advisors;
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.onScroll, false);
+    }
 
-                this.setState({
-                    isLoading: false,
-                    advisors: [
-                        ...this.state.advisors,
-                        ...nextAdvisors,
-                    ],
+    loadAdvisors = () => {
+        const delay = (ms) => {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        this.setState({ isLoading: true }, () => {
+            delay(1000).then(() => {
+                request
+                .get('http://localhost:5000/')
+                .then((results) => {
+                    const nextAdvisors = results.body.advisors;
+
+                    this.setState({
+                        isLoading: false,
+                        advisors: [
+                            ...this.state.advisors,
+                            ...nextAdvisors,
+                        ],
+                    });
+                })
+                .catch((err) => {
+                    this.setState({
+                        error: err.message,
+                        isLoading: false,
+                    });
                 });
-            })
-            .catch((err) => {
-                this.setState({
-                    error: err.message,
-                    isLoading: false,
-                });
-            })
+            });
         });
     }
 
@@ -118,11 +130,14 @@ class AdvisorsPage extends Component {
 
         return (
             <Fragment>
-                <Sorter clicked={this.sortHandler} />
-                <FilterStatus changed={this.filterStatusHandler} statusFilter={statusFilter} />
-                <FilterLanguage changed={this.filterLanguageHandler} languagesFilter={languagesFilter} />
-                <AdvisorsList advisors={advisors} statusFilter={statusFilter} languagesFilter={languagesFilter} />
-                <hr />
+                {advisors.length > 0 &&
+                    <Fragment>
+                        <Sorter clicked={this.sortHandler} />
+                        <FilterStatus changed={this.filterStatusHandler} statusFilter={statusFilter} />
+                        <FilterLanguage changed={this.filterLanguageHandler} languagesFilter={languagesFilter} />
+                        <AdvisorsList advisors={advisors} statusFilter={statusFilter} languagesFilter={languagesFilter} />
+                    </Fragment> 
+                }
                 {error &&
                     <div style={{ color: '#900' }}>
                         {error}
