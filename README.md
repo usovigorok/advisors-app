@@ -1,3 +1,34 @@
+## Advisors App
+
+Versions used:
+Node JS v8.11.2
+npm v6.9.2
+
+Please install dependencies from root folder
+`npm install`
+
+To start application please do following steps:
+
+1. cd server/
+2. install dependencies `npm install`
+2. run `npm start`
+
+Server will start here: `http://localhost:5000` and provide advisors
+
+Then please run `npm start` from root folder
+
+Application will start. Please open it in browser: `http://localhost:3000`
+
+Features:
+- Sort advisors by number of reviews
+- Filter advisors by status and language
+- Basic testing
+
+- Nice look and feel
+- Node.js server to serve data to the client
+- Promise and setTimeout to simulate a delay in returning response through a network
+- Unlimited scrolling of advisors when user scrolls to the bottom of the page
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

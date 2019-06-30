@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Sorter = (props) => {
-    const {clicked} = props;
+    const {clicked, sortAsc} = props;
+    const sortDir = sortAsc ? 'asc' : 'desc';
 
     return (
-        <button type="button" className="btn btn-primary mt-3 mb-3" onClick={clicked}>Sort</button>
+        <button type="button" className="btn mt-3 mb-3" style={{background: '#5B0149', color: '#fff'}} onClick={clicked}>Sort {sortDir}</button>
     );
 }
 

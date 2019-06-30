@@ -125,7 +125,8 @@ class AdvisorsPage extends Component {
             isLoading,
             advisors,
             statusFilter,
-            languagesFilter
+            languagesFilter,
+            sortAsc
         } = this.state;
 
         return (
@@ -133,7 +134,7 @@ class AdvisorsPage extends Component {
                 {advisors.length > 0 &&
                     <div className="container">
                         <div className="form">
-                            <Sorter clicked={this.sortHandler} />
+                            <Sorter clicked={this.sortHandler} sortAsc={sortAsc} />
                             <FilterStatus changed={this.filterStatusHandler} statusFilter={statusFilter} />
                             <FilterLanguage changed={this.filterLanguageHandler} languagesFilter={languagesFilter} />
                         </div>

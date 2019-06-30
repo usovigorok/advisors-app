@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Advisor from '../Advisor/Advisor';
 
 const filterByStatus = (advisors, statusFilter) => {
@@ -22,6 +22,14 @@ const AdvisorsList = (props) => {
     const { advisors, statusFilter, languagesFilter } = props;
     let filteredAdvisors = filterByStatus(advisors, statusFilter);
     filteredAdvisors = filterByLanguage(filteredAdvisors, languagesFilter);
+
+    if (filteredAdvisors.length === 0) {
+        return (
+            <Fragment>
+                Advisors will come soon ;)
+            </Fragment>
+        )
+    }
 
     return filteredAdvisors.map(advisor => {
         return (

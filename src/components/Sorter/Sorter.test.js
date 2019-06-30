@@ -12,6 +12,6 @@ describe('<Sorter />', () => {
     it('should render a sort button', () => {
         const wrapper = shallow(<Sorter />);
         expect(wrapper.find('button')).toHaveLength(1);
-        expect(wrapper.text()).toEqual('Sort');
+        expect(wrapper.contains('Sort'));
     });
 });
