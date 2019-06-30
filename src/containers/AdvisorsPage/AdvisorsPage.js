@@ -131,12 +131,14 @@ class AdvisorsPage extends Component {
         return (
             <Fragment>
                 {advisors.length > 0 &&
-                    <Fragment>
-                        <Sorter clicked={this.sortHandler} />
-                        <FilterStatus changed={this.filterStatusHandler} statusFilter={statusFilter} />
-                        <FilterLanguage changed={this.filterLanguageHandler} languagesFilter={languagesFilter} />
+                    <div className="container">
+                        <div className="form">
+                            <Sorter clicked={this.sortHandler} />
+                            <FilterStatus changed={this.filterStatusHandler} statusFilter={statusFilter} />
+                            <FilterLanguage changed={this.filterLanguageHandler} languagesFilter={languagesFilter} />
+                        </div>
                         <AdvisorsList advisors={advisors} statusFilter={statusFilter} languagesFilter={languagesFilter} />
-                    </Fragment> 
+                    </div>
                 }
                 {error &&
                     <div style={{ color: '#900' }}>

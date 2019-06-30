@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 
 const statuses = [
     {
@@ -19,15 +19,16 @@ const FilterStatus = (props) => {
     const {changed, statusFilter} = props;
 
     return (
-        <div>
-            Filter by status
+        <div className="form-group row">
+            <div className="col-sm-2">Filter by status</div>
             {
                 statuses.map(current => {
                     const checked = (statusFilter === current.value);
 
                     return (
-                        <Fragment key={current.value}>
+                        <div className="col-sm-2" key={current.value}>
                             <input
+                                className="form-control"
                                 type="radio"
                                 name="status"
                                 value={current.value}
@@ -35,7 +36,7 @@ const FilterStatus = (props) => {
                                 defaultChecked={checked}
                             />
                             {current.text}
-                        </Fragment>
+                        </div>
                     );
                 })
             }
