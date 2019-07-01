@@ -19,6 +19,9 @@ Then please run `npm start` from root folder
 
 Application will start. Please open it in browser: `http://localhost:3000`
 
+To start tests please execute:
+`npm test`
+
 Features:
 - Sort advisors by number of reviews
 - Filter advisors by status and language
@@ -26,7 +29,7 @@ Features:
 
 - Nice look and feel
 - Node.js server to serve data to the client
-- Promise and setTimeout to simulate a delay in returning response through a network
+- Promise and setTimeout to simulate a delay in returning response through a network (1 second delay is used)
 - Unlimited scrolling of advisors when user scrolls to the bottom of the page
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
